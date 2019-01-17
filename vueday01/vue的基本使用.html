@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- {{ msg }} -->
+  <!-- V层 -->
+  <div id="app">
+    <!-- Mustache -->
+    <!-- <p v-cloak>{{ msg }}</p> -->
+    <!-- innerText -->
+    <p>{{ msg + 'xxx' }} 今天天气真好啊! </p>
+
+    <p v-text="msg + 'xxx'">今天天气真好啊! </p>
+    <!-- innerHTML -->
+    <p v-html="msg"></p>
+
+    <input value="" type="text">
+  </div>
+
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script>
+    // MVVM
+    let vm = new Vue({ //VM层
+      el: '#app', // Vue要托管的区域
+      // M层
+      data: {
+        msg: '<h1>hello world!</h1>'
+      }
+    })
+  </script>
+</body>
+
+</html>

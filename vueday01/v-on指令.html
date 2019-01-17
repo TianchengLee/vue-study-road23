@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- {{ msg }} -->
+  <!-- V层 -->
+  <div id="app">
+    <!-- <input v-bind:value="val + 'aaa'" type="text"> -->
+    <!-- <input :aaa="val" :value="val + 'aaa'" type="text"> -->
+    <p>{{ msg }}</p>
+    <!-- <input id="inp" :value="msg" v-on:keyup="keydownHandler" type="text"> -->
+    <input id="inp" :value="msg" @keyup="keydownHandler" type="text">
+  </div>
+
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script>
+    // setAttribute()  设置自定义属性
+    // MVVM
+    let vm = new Vue({ //VM层
+      el: '#app', // Vue要托管的区域
+      // M层
+      data: {
+        val: '我是值',
+        msg: '你好啊!'
+      },
+      methods: {
+        keydownHandler() {
+          // console.log('我被调用了!')
+          // console.log(document.querySelector('#inp').value)
+          this.msg = document.querySelector('#inp').value
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
