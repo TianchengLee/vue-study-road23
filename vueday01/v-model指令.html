@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+
+  <!-- {{ msg }} -->
+  <!-- V层 -->
+  <div id="app">
+    <h1>{{msg}}</h1>
+    <!-- 在Vue中只有一个指令可以实现双向数据绑定: v-model -->
+    <!-- <input :aaa="msg" :value="msg" type="text"> -->
+    <!-- 为什么v-model不需要手动指定要绑定的属性呢??? -->
+    <!-- 由于用户与input交互时, 修改的都是value属性的值, 所以v-model只能绑定value属性 -->
+    <!-- 除了可以从M层绑定到V层, 还可以在用户修改value属性时 自动同步回M层 -->
+    <input v-model="msg" type="text">
+  </div>
+
+  <script>
+    // setAttribute()  设置自定义属性
+    // MVVM
+    let vm = new Vue({ //VM层
+      el: '#app', // Vue要托管的区域
+      // M层
+      data: {
+        msg: '我是值'
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -21,10 +21,22 @@
   </div>
 
   <script>
+    // createObj('xx', 18, 'male')
+    // function createObj(name, age, gender) {
+    //   return {
+    //     name, age, gender
+    //   }
+    // }
+    // let obj = {name: 'xx', age: 18, gender: 'male'}
     // 注意：在 VM实例中，如果想要获取 data 上的数据，或者 想要调用 methods 中的 方法，必须通过 this.数据属性名  或  this.方法名 来进行访问，这里的this，就表示 我们 new 出来的  VM 实例对象
+    // jQuery Vue React Angular
     var vm = new Vue({
       el: '#app',
       data: {
+        // 设计模式(前人写代码总结出来的一些套路) : 观察者模式  单例  简单工厂
+        // M V VM
+        // 数据绑定  databinding
+        // document.getElementById()   findViewById()
         msg: '猥琐发育，别浪~~！',
         intervalId: null // 在data上定义 定时器Id
       },

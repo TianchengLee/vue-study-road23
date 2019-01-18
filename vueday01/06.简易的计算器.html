@@ -24,7 +24,7 @@
 
     <input type="button" value="=" @click="calc">
 
-    <input type="text" v-model="result">
+    <input disabled type="text" v-model="result">
   </div>
 
   <script>
@@ -40,7 +40,7 @@
       methods: {
         calc() { // 计算器算数的方法  
           // 逻辑：
-          /* switch (this.opt) {
+          switch (this.opt) {
             case '+':
               this.result = parseInt(this.n1) + parseInt(this.n2)
               break;
@@ -53,11 +53,15 @@
             case '/':
               this.result = parseInt(this.n1) / parseInt(this.n2)
               break;
-          } */
+          }
 
           // 注意：这是投机取巧的方式，正式开发中，尽量少用
-          var codeStr = 'parseInt(this.n1) ' + this.opt + ' parseInt(this.n2)'
-          this.result = eval(codeStr)
+          // var codeStr = 'parseInt(this.n1) ' + this.opt + ' parseInt(this.n2)'
+          // this.result = eval(codeStr)
+          // eval() 函数  现已被淘汰  不建议使用
+          // 作用: 把代码封装成字符串  由eval函数进行解析执行
+          // 'parseInt(this.n1)'
+          // new Function('var a = 10')
         }
       }
     });
