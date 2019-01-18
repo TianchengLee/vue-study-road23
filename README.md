@@ -7,3 +7,9 @@
 - [笔记](./notes/vueday01.md "笔记")
 
 - [代码](./vueday01 "代码")
+
+### vue day02 ###
+
+- [笔记](./notes/vueday02.md "笔记")
+
+- [代码](./vueday02 "代码")
