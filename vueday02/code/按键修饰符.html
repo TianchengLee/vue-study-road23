@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <input @keydown.enter="keydownHandler" type="text">
+
+  </div>
+  <script>
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '你好啊世界!Helloworld!'
+      },
+      methods: {
+        keydownHandler() {
+          console.log('被按了!')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

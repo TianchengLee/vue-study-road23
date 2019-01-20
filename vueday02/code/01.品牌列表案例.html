@@ -22,12 +22,12 @@
       <div class="panel-body form-inline">
         <label>
           Id:
-          <input type="text" class="form-control" v-model="id">
+          <input v-color="'purple'" type="text" class="form-control" v-model="id">
         </label>
 
         <label>
           Name:
-          <input type="text" class="form-control" v-model="name">
+          <input v-color @keyup.enter="add" type="text" class="form-control" v-model="name">
         </label>
 
         <!-- 在Vue中，使用事件绑定机制，为元素指定处理函数的时候，如果加了小括号，就可以给函数传参了 -->
@@ -35,13 +35,10 @@
 
         <label>
           搜索名称关键字：
-          <input type="text" class="form-control" v-model="keywords">
+          <input v-color="'green'" v-focus type="text" class="form-control" v-model="keywords">
         </label>
       </div>
     </div>
-
-
-
     <table class="table table-bordered table-hover table-striped">
       <thead>
         <tr>
@@ -58,19 +55,62 @@
         <tr v-for="item in search(keywords)" :key="item.id">
           <td>{{ item.id }}</td>
           <td v-text="item.name"></td>
-          <td>{{ item.ctime }}</td>
+          <td>{{ item.ctime | dateFormat }}</td>
           <td>
             <a href="" @click.prevent="del(item.id)">删除</a>
           </td>
         </tr>
       </tbody>
     </table>
-
-
-
   </div>
-
+  <script src="./lib/moment.js"></script>
   <script>
+    // // 页面结构加载完毕后立即执行
+    // $(function() {})
+    // // 页面结构和外部资源全部加载完毕才执行
+    // $(window).load(function() {})
+
+    Vue.directive('color', {
+      bind(el, binding) {
+        // color只是DOM的属性, 即使元素不在页面上, 最终被渲染到页面时也会读取元素身上的所有属性进行渲染
+        // console.log(binding)
+        el.style.color = binding.value || 'pink'
+      },
+      inserted(el) {
+      }
+    })
+
+    // 定义全局指令
+    // 参数1: 指令名称, 不需要 v-
+    // 参数2: 对象, 对象中有可以有5个函数 bind, inserted, update, componentUpdated, unbind
+    //     5个函数就是所谓的钩子函数, 就是当指令应用到标签身上整个过程, 每个阶段所调用的函数
+    Vue.directive('focus', {
+      // 只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+      bind(el) {
+        // console.log(el)
+        // console.log('我被绑定了')
+        // el.focus()
+      },
+      // 被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
+      inserted(el) {
+        console.log(el)
+        // console.log('我insert到父节点了')
+        el.focus() // 获取焦点, 获取焦点的前提是元素在页面上显示出来
+      },
+      // 所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前
+      update() { }
+    })
+
+    // console.log(moment)
+    // pattern = '' 是给形参 赋默认值  等同于以前的 pattern = pattern || ''
+    Vue.filter('dateFormat', function (dateStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+      // pattern = pattern || ''
+      // 格式化日期和时间
+      // moment
+      // let date = new Date(dateStr)
+      return moment(dateStr).format(pattern)
+    })
+
     // 创建 Vue 实例，得到 ViewModel
     var vm = new Vue({
       el: '#app',
@@ -144,6 +184,24 @@
           })
 
           // return newList
+        }
+      },
+      filters: {
+        // 方法名就是过滤器名 
+        // 方法就是过滤器
+        // 就近原则 如果当前vm实例的私有过滤器和全局过滤器同名了 就会优先使用私有过滤器
+        msgFormat() {
+
+        }
+      },
+      directives: {
+        focus: {
+          bind() {
+
+          },
+          inserted() {
+
+          }
         }
       }
     });

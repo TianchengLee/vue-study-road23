@@ -128,4 +128,25 @@ v-if和v-show都是用于控制元素的显示隐藏的
 
 ### 过滤器 ###
 
+过滤器的基本使用方法:
+
+1. 先定义好全局过滤器
+
+		// 定义全局过滤器
+	    // 参数1: 过滤器名称
+	    // 参数2: 回调函数
+	    //   回调函数中第一个参数是管道符左边的数据, 第二个参数起都是过滤器调用时传入的参数
+	    Vue.filter('msgFilter', function(data, str) {
+	      return data.replace('Helloworld', str)
+	    })
+
+2. 在插值表达式或v-bind中使用, v-text等其他指令中无法使用
+
+	    <p>{{ msg | msgFilter('你好世界') }}</p>
+	
+	    <input type="text" :value="msg | msgFilter('你好世界')">
+
+注意: 过滤器可以串联使用, 例如
+
+	<p>{{ msg | msgFilter('你好世界') | test }}</p>
 

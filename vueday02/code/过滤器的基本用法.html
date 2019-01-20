@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <p>{{ msg | msgFilter('你好世界') }}</p>
+
+    <input type="text" :value="msg | msgFilter('你好世界')">
+
+  </div>
+  <script>
+
+    // 定义全局过滤器
+    // 参数1: 过滤器名称
+    // 参数2: 回调函数
+    //   回调函数中第一个参数是管道符左边的数据, 第二个参数起都是过滤器调用时传入的参数
+    Vue.filter('msgFilter', function(data, str) {
+      return data.replace('Helloworld', str)
+    })
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '你好啊世界!Helloworld!'
+      }
+    })
+  </script>
+</body>
+
+</html>
