@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <style>
+  /* v-enter指的是入场动画开始的位置 */
+  /* 为什么入场动画只需要指定起点 不需要目标? */
+  /* 入场动画指定了起点, 马上就会被移除掉, 移除后元素自然就会奔着原本的位置去 */
+  .itcast-enter {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+
+  /* v-leave-to指的是离场动画结束后的位置 */
+  /* 为什么离场动画只需要指定目标 不需要起点? */
+  /* 因为元素本身的位置就是起点, 只需要指定目标, 元素就会奔着目标持续过渡 */
+  .itcast-leave-to {
+    opacity: 0;
+    transform: translateX(200px)
+  }
+
+  .itcast-enter-active,
+  .itcast-leave-active {
+    transition: all 0.5s ease-in-out;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <input type="button" value="toggle" @click="flag=!flag">
+    <!-- 需求： 点击按钮，让 h3 显示，再点击，让 h3 隐藏 -->
+    <transition name="itcast">
+      <h3 v-show="flag">这是一个H3</h3>
+    </transition>
+  </div>
+
+  <script>
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        flag: false
+      },
+      methods: {}
+    });
+  </script>
+</body>
+
+</html>

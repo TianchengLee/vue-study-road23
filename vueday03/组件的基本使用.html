@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 如果要使用组件，直接，把组件的名称，以 HTML 标签的形式，引入到页面中，即可 -->
+    <com></com>
+    <!-- transition transition-group vue中提供的组件 -->
+  </div>
+
+  <template id="tmp">
+    <div>
+      <p>你是一个p</p>
+      <h1>你是一个h1</h1>
+    </div>
+  </template>
+
+  <script>
+
+    // 注意: 组件必须要注册完成后, 才可以使用!
+
+    // 创建组件, 第一种方式 (不推荐使用)
+    // let com = Vue.extend({
+    //   template: '<h1>com组件的模板代码</h1>'
+    // })
+
+    // 注册组件  不论通过哪一种方式创建出来的组件, 注册都是如此
+    // 参数1: 组件名, 如果注册时用了驼峰命名, 使用时需要改成-连接
+    // 参数2: 组件对象
+    // Vue.component('com', com)
+    // Vue.component('com', Vue.extend({
+    //   template: '<h1>com组件的模板代码</h1>'
+    // }))
+
+    // 创建组件的第二种方式  直接使用对象即可
+    // Vue.component('com', {
+    //   template: '<h1>com组件的模板代码</h1>'
+    // })
+
+    // 创建组件的第三种方式  同样是对象, 但是template属性指向一个模板ID即可
+    // 需要在app区域外定义好模板, 这种做法有智能提示, 非常方便!
+    // 全局组件 
+    Vue.component('com', {
+      template: '#tmp'
+    })
+
+    // 全局过滤器 
+    Vue.filter()
+
+    // 全局指令 
+    Vue.directive()
+
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {},
+      filters: {
+        
+      },
+      directives: {
+        
+      },
+      components: {
+        'com': {
+          template: '#tmp'
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

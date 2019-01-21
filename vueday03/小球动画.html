@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <style>
+    .ball {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <input type="button" value="快到碗里来" @click="flag=!flag">
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter">
+      <div class="ball" v-show="flag"></div>
+    </transition>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        flag: false
+      },
+      methods: {
+        beforeEnter(el){
+          // console.log('入场动画开始之前')
+          el.style.transform = 'translate(0, 0)'
+        },
+        enter(el, done){
+          // console.log('入场动画正在进行中...')
+          // 获取元素的宽度
+          el.offsetWidth // 强制动画刷新
+
+          el.style.transition = 'all .5s ease'
+          el.style.transform = 'translate(200px, 500px)'
+
+          // done就是afterEnter的引用
+          // 当只用 JavaScript 过渡的时候，在 enter 和 leave 中必须使用 done 进行回调。否则，它们将被同步调用，过渡会立即完成。
+          // done 是 afterEnter 的异步调用
+          // 在内部监听el的过渡事件: webkitTransitionEnd
+          // webkitTransitionEnd : 监听过渡完成的事件
+
+          // 如果调用了 done, 表示当动画结束时, 执行afterEnter函数
+          done()
+        },
+        afterEnter(el){
+          // console.log('入场动画结束了')
+          // el.style.display = 'none'
+          this.flag = !this.flag
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
