@@ -35,7 +35,13 @@
 
   <script>
     Vue.component('mycom3', {
-      template: '#tmpl'
+      template: '#tmpl',
+      data() {
+        return { // {} 等同于 new Object() 意味着新创建了一个对象, 就可以保证每个组件内部的data都是独立的
+
+        }
+      },
+      methods: {}
     })
 
     // 创建 Vue 实例，得到 ViewModel

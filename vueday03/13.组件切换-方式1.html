@@ -11,17 +11,44 @@
 
 <body>
   <div id="app">
+
+    <p>爸爸收到的数据是: {{usernameFromLogin}}</p>
+
     <a href="" @click.prevent="flag=true">登录</a>
     <a href="" @click.prevent="flag=false">注册</a>
 
-    <login v-if="flag"></login>
-    <register v-else="flag"></register>
+    <!-- @click="事件处理函数" -->
+    <login @foo="gotIt" :pmsg="msg" v-if="flag"></login>
+    <register :pmsg="msg" v-else="flag"></register>
 
   </div>
 
+  <template id="loginTml">
+    <div class="login-container">
+      <h3 @click="pmsg = '我被修改了!!!'">登录组件----{{ pmsg }}</h3>
+      <label>
+        用户名: 
+        <input type="text" v-model="username">
+      </label>
+      <input @click="sendUsername" type="button" value="给爸爸">
+    </div>
+  </template>
+
   <script>
     Vue.component('login', {
-      template: '<h3>登录组件</h3>'
+      props: ['pmsg'],
+      data() {
+        return {
+          username: ''
+        }
+      },
+      methods: {
+        sendUsername() {
+          // console.log('我即将要发射数据给爸爸了!', this.username)
+          this.$emit('foo', this.username)
+        }
+      },
+      template: '#loginTml'
     })
 
     Vue.component('register', {
@@ -32,9 +59,16 @@
     var vm = new Vue({
       el: '#app',
       data: {
-        flag: false
+        flag: true,
+        msg: '父组件中的数据msg',
+        usernameFromLogin: ''
       },
-      methods: {}
+      methods: {
+        gotIt(data) {
+          // console.log(data, 'got it!')
+          this.usernameFromLogin = data
+        }
+      }
     });
   </script>
 </body>

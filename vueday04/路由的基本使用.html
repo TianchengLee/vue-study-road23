@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <!-- 1. 安装 vue-router 路由模块 -->
+  <script src="./lib/vue-router-3.0.1.js"></script>
+  <style>
+
+    .router-link-active {
+      color: pink;
+      background-color: hotpink;
+      padding: 2px;
+      border: 1px solid hotpink;
+      border-radius: 5px;
+
+    }
+
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateX(140px);
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 0.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- <a href="#/login">登录</a>
+    <a href="#/register">注册</a> -->
+
+    <router-link tag="span" to="/login">登录</router-link>
+    <router-link to="/register">注册</router-link>
+
+    <!-- 如果想使用<>在html中使用组件, 必须要注册(全局或私有均可) -->
+    <!-- <login></login> -->
+
+    <!-- 这是 vue-router 提供的元素，专门用来 当作占位符的，将来，路由规则，匹配到的组件，就会展示到这个 router-view 中去 -->
+    <!-- 所以： 我们可以把 router-view 认为是一个占位符 -->
+    <!-- 路由仅仅只是帮助我们匹配#/的路径, 进行组件的切换!!!! -->
+    <transition mode="out-in">
+      <router-view></router-view>
+    </transition>
+<!--     
+    <transition>
+      <component :is="componentId"></component>
+    </transition> -->
+  </div>
+
+  <script>
+    // 组件的模板对象
+    var login = {
+      template: '<h1>登录组件</h1>'
+    }
+
+    var register = {
+      template: '<h1>注册组件</h1>'
+    }
+
+    // 注册组件  Vue.component这种方式
+    // 目的是为了在模板中使用 <> 方式使用组件
+    // Vue.component('login', login)
+
+    // 2. 创建路由对象
+    let router = new VueRouter({
+      routes: [
+        // { path: '/', component: login },// 虽然可以让首页显示login组件, 但是不推荐
+        { path: '/', redirect: '/login' }, // 路由重定向, 当用户访问 / 路径时 自动跳转到 /login 路径
+        { path: '/login', component: login }, // 一个路由匹配规则
+        { path: '/register', component: register },
+      ],
+      // linkActiveClass: 'mui-active'
+    })
+
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {},
+      router // 3. 将创建的路由对象挂载到vm实例中
+    });
+  </script>
+</body>
+
+</html>
