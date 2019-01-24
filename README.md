@@ -25,3 +25,9 @@
 - [笔记](./notes/vueday04.md "笔记")
 
 - [代码](./vueday03 "代码")
+
+### vue day05 ###
+
+- [笔记](./notes/vueday05.md "笔记")
+
+- [代码](./vueday04 "代码")
