@@ -6,6 +6,8 @@
 import $ from 'jquery'
 // const $ = require('jquery')
 
+// 转译工具 babel 将所有ES6的语法  转换成ES5  为了浏览器兼容性
+
 import './css/index.css'
 import './css/index.less'
 import './css/index.scss'
